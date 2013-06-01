@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.template.localreminder.AddItemActivity"
+            android:name="com.template.localreminder.ChangeDataSetActivity"
             android:label="@string/title_activity_additem"
             android:windowSoftInputMode="adjustResize" >
         </activity>

@@ -105,14 +105,53 @@ public class DatabaseAdapter{
 		entry.setItem(cursor.getString(1));
 		return entry;
 	}
+	
+	public long getId (String entry) {
+		String query = 
+						"SELECT "
+						+ Database.KEY_ID 
+						+ " FROM " 
+						+ Database.TABLE_ENTRIES
+						+ " WHERE " 
+						+ Database.KEY_ITEM 
+						+ " = '" 
+						+ entry
+						+ "'";
+		try {
+			open();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		Cursor cursor = database.rawQuery(query, null);
+		cursor.moveToFirst();
+		long entryId = Long.parseLong(cursor.getString(0));
+		cursor.close();
+		close();
+		return entryId;
+	}
 
-	
-	
 	public int getCount() {
 		String countQuery = "SELECT * FROM " + Database.TABLE_ENTRIES;
 		Cursor cursor = database.rawQuery(countQuery, null);
 		cursor.close();
 		return cursor.getCount() + 1;
+	}
+	
+	/** Update a Reminder Entry in the Database
+	 * @param entry the entry, which has to be updated
+	 */
+	public void updateEntry (ReminderEntry entry) {
+		//open the database connection
+				try {
+					open();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+				ContentValues cv = new ContentValues();
+				cv.put(Database.KEY_ITEM, entry.getItem());
+				long id = entry.getId();
+				database.update(Database.TABLE_ENTRIES, cv, Database.KEY_ID + " = " + id, null);
+				close(); //close the database connection
 	}
 //
 //

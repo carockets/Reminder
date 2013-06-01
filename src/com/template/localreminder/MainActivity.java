@@ -65,7 +65,7 @@ public class MainActivity extends ListActivity {
      */
     public void add_Item(View view){
     	// create an Intent and hand it to the view
-    	Intent intent = new Intent(this, AddItemActivity.class);
+    	Intent intent = new Intent(this, ChangeDataSetActivity.class);
     	startActivity(intent);
     }
     
