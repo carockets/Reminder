@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LocalReminder</string>
+    <string name="app_name">Local Reminder</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_additem">AdditemActivity</string>
+    <string name="title_activity_additem">Add Entry</string>
 	<string name="Add_Entry">Add Entry</string>
 	<string name="Delete_First_Entry">Delete First Entry</string>
 	<string name="hello">Hello</string>

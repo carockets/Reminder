@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Local Reminder</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_additem">Eintrag hinzufügen</string>
+	<string name="Add_Entry">Meine Notiz</string>
+	<string name="Delete_First_Entry">Ersten Eintrag entfernen</string>
+	<string name="hello">Hello</string>
+	<string name="Save">Speichern</string>
+	<string name="Back">Zurück</string>
+	<string name="Add_Text">Text eingeben</string>
+</resources>
