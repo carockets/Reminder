@@ -1,6 +1,8 @@
 package com.template.localreminder;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -30,11 +32,29 @@ public class AddItemActivity extends Activity {
 	 * @param view
 	 */
 	public void saveEntry(View view){
+		EditText text = (EditText) findViewById(R.id.edit_note);
+		String entryText = text.getText().toString();
+		
+		if (entryText.isEmpty()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Cannot save an empty note")
+			       .setCancelable(false)
+			       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   dialog.cancel();
+			           }
+			       });
+			AlertDialog alert = builder.create();
+			alert.show();
+			return;
+		}
+		
+		
 		// create a database adapter
 		DatabaseAdapter dba = new DatabaseAdapter(this);
 		// retrieve the text from the text field
-		EditText text = (EditText) findViewById(R.id.edit_note);
-		String entryText = text.getText().toString();
+		
+		
 		// create an entry id (just for know done with Math.Random )
 		int entryId = (int) Math.random() * 10000;
 		// create the ReminderEntry object
