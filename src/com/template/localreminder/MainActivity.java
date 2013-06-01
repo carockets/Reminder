@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 // inherit from ListActivity!
 public class MainActivity extends ListActivity {
+	
+	public static final String EXTRA_MESSAGE = "com.template.localreminder.Message";
 	
 	// make the Adapter available from everywhere (probably not so good but
 	// I didn't know a better implementation at this moment.
@@ -81,6 +84,17 @@ public class MainActivity extends ListActivity {
     	}
     	// refresh the list
     	adapter.notifyDataSetChanged();
+    }
+    
+    // Display a selected Item
+    @Override 
+    public void onListItemClick(ListView l, View view, int position, long id) {
+    	// Do something when a list item is clicked
+    	Intent intent = new Intent(this, DisplayItemActivity.class);
+    	ReminderEntry entryToDisplay = adapter.getItem(position);
+    	String message = entryToDisplay.getItem(); // get reminder entry;
+    	intent.putExtra(EXTRA_MESSAGE, message); // next activity has to query the data
+    	startActivity(intent);
     }
     
 }

@@ -5,8 +5,8 @@
     <string name="action_settings">Einstellungen</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_additem">Eintrag hinzufügen</string>
-	<string name="Add_Entry">Meine Notiz</string>
-	<string name="Delete_First_Entry">Ersten Eintrag entfernen</string>
+	<string name="Add_Entry">Neue Notiz</string>
+	<string name="Delete_First_Entry">Löschen</string>
 	<string name="hello">Hello</string>
 	<string name="Save">Speichern</string>
 	<string name="Back">Zurück</string>

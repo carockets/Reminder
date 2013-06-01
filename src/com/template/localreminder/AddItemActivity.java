@@ -3,6 +3,7 @@ package com.template.localreminder;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -19,6 +20,13 @@ public class AddItemActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_additem);
 		EditText text = (EditText) findViewById(R.id.edit_note);
+		
+		//check if a new note is created or a note is edited
+		Intent intent = getIntent();
+		if (intent.getStringExtra(DisplayItemActivity.MESSAGE) != "") {
+			String message = intent.getStringExtra(DisplayItemActivity.MESSAGE);
+			text.setText(message);
+		}
 	}
 
 	@Override

@@ -24,8 +24,12 @@
         </activity>
         <activity
             android:name="com.template.localreminder.AddItemActivity"
-            android:label="@string/title_activity_additem" 
-            android:windowSoftInputMode="adjustResize">
+            android:label="@string/title_activity_additem"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.template.localreminder.DisplayItemActivity"
+            android:label="@string/title_activity_diaplay_item" >
         </activity>
     </application>
 
