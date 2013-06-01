@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name="com.template.localreminder.ChangeDataSetActivity"
-            android:label="@string/title_activity_additem"
+            android:label="@string/title_activity_change_dataset"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity

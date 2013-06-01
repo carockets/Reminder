@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	<!-- global -->
     <string name="app_name">Local Reminder</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_additem">Add Entry</string>
-    <string name="Add_Entry">Add Entry</string>
-    <string name="Delete_First_Entry">Delete First</string>
-    <string name="hello">Hello</string>
-    <string name="Save">Save</string>
-    <string name="Back">Back</string>
-    <string name="Add_Text">Add Text</string>
-    <string name="title_activity_diaplay_item">DiaplayItemActivity</string>
-    <string name="Delete">Delete</string>
-    <string name="Edit">Edit</string>
+    <string name="title_activity_change_dataset">Add or edit entry</string>
+    <string name="title_activity_diaplay_item">Display enty</string>
+    
+    <!-- Buttons -->
+    <string name="add_Entry">+ Add Entry</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    
+    <!-- Text Field hints -->
+    <string name="add_Text">Add Text</string>
+    
+    
 
 </resources>

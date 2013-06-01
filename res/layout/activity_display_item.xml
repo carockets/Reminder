@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="edit_entry"
-            android:text="@string/Edit" />
+            android:text="@string/edit" />
 
         <Button
             android:id="@+id/delete"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="delete_entry"
-            android:text="@string/Delete" />
+            android:text="@string/delete" />
         
         <Button
             android:id="@+id/back"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="back"
-            android:text="@string/Back" />
+            android:text="@string/back" />
     </LinearLayout>
 
 </LinearLayout>

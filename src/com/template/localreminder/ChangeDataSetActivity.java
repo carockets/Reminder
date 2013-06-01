@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+/** This class manages all the entry changes in the database
+ * including creating entries, deleting an update them
+ */
+
 public class ChangeDataSetActivity extends Activity {
 	
 	// we get the adapter from the MainActivity
@@ -20,12 +24,13 @@ public class ChangeDataSetActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_additem);
+		setContentView(R.layout.activity_change_dataset);
 		EditText text = (EditText) findViewById(R.id.edit_note);
 		
 		//check if a new note is created or a note is edited
 		Intent intent = getIntent();
-		if (intent.getStringExtra(DisplayItemActivity.MESSAGE) != "") {
+		String intentMessage = intent.getStringExtra(DisplayItemActivity.MESSAGE);
+		if (intentMessage != null) {
 			String existingText = intent.getStringExtra(DisplayItemActivity.MESSAGE);
 			existingEntry.setItem(existingText);
 			text.setText(existingText);
@@ -36,11 +41,12 @@ public class ChangeDataSetActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.additem, menu);
+		getMenuInflater().inflate(R.menu.change_dataset, menu);
 		return true;
 	}
 	
 	/** Action to save an entry to the database, when the "Save" Button is pressed
+	 * How the method acts depends on if the entry is created new or updated
 	 * @param view
 	 */
 	public void saveEntry(View view){
@@ -94,6 +100,9 @@ public class ChangeDataSetActivity extends Activity {
 		}
 	}
 	
+	/** Go back to previous view
+	 * @param view
+	 */
 	public void back(View view){
 		finish();
 	}

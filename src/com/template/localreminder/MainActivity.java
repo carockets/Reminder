@@ -69,23 +69,6 @@ public class MainActivity extends ListActivity {
     	startActivity(intent);
     }
     
-    /** Deletes the first ReminderItem of the list
-     * @param view
-     */
-    public void delete_Item(View view) {
-    	// create a DatabaseAdapter
-    	DatabaseAdapter databaseAdapter = new DatabaseAdapter(this);
-    	// it's only possible to delete an item when there is more than one
-    	if (getListAdapter().getCount() > 0) {
-    		// select the entry, which has to be deleted
-    		ReminderEntry entry = (ReminderEntry) getListAdapter().getItem(0);
-    		databaseAdapter.deleteEntry(entry); // remove Entry from Database
-    		adapter.remove(entry); // and from the List (Adapter)
-    	}
-    	// refresh the list
-    	adapter.notifyDataSetChanged();
-    }
-    
     // Display a selected Item
     @Override 
     public void onListItemClick(ListView l, View view, int position, long id) {

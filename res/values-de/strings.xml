@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- global -->
     <string name="app_name">Local Reminder</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_additem">Eintrag hinzufügen</string>
-	<string name="Add_Entry">Neue Notiz</string>
-	<string name="Delete_First_Entry">Löschen</string>
-	<string name="hello">Hello</string>
-	<string name="Save">Speichern</string>
-	<string name="Back">Zurück</string>
-	<string name="Add_Text">Text eingeben</string>
+    <string name="title_activity_change_dataset">Eintrag ändern oder bearbeiten</string>
+    <string name="title_activity_diaplay_item">Eintrag anzeigen</string>
+    
+    <!-- Buttons -->
+    <string name="add_Entry">+ Eintrag hinzufügen</string>
+    <string name="save">Speichern</string>
+    <string name="back">Zurück</string>
+    <string name="delete">Löschen</string>
+    <string name="edit">Bearbeiten</string>
+    
+    <!-- Text Field hints -->
+    <string name="add_Text">Text eigeben</string>
 </resources>

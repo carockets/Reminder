@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 public class DisplayItemActivity extends Activity {
 	
+	// the message which has to be passed to the change_dataset view
+	// in case one wants to edit the entry
 	public static final String MESSAGE = "";
 	private String entryText;
 
@@ -35,10 +37,16 @@ public class DisplayItemActivity extends Activity {
 		return true;
 	}
 	
+	/** go back to previous view
+	 * @param view
+	 */
 	public void back(View view){
 		finish();
 	}
 	
+	/** Opens the edit mode to edit the text
+	 * @param view
+	 */
 	public void edit_entry(View view) {
 		Intent intent = new Intent(this, ChangeDataSetActivity.class);
 		TextView textView = (TextView) findViewById(R.id.EntryView);
@@ -47,6 +55,9 @@ public class DisplayItemActivity extends Activity {
     	startActivity(intent);
 	}
 	
+	/** Deletes an entry from database
+	 * @param view
+	 */
 	public void delete_entry(View view) {
 		DatabaseAdapter dba = new DatabaseAdapter(this);
 		ReminderEntry entryToDelete = new ReminderEntry();
