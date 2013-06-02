@@ -11,15 +11,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class DatabaseAdapter {
 
 	private SQLiteDatabase database;
 	private Database dbHelper;
-	private String[] allEntries = { Database.KEY_ID, Database.KEY_ITEM };
 
 	public DatabaseAdapter(Context context) {
 		dbHelper = new Database(context);
@@ -52,7 +48,9 @@ public class DatabaseAdapter {
 			sqle.printStackTrace();
 		}
 		ContentValues cv = new ContentValues();
-		cv.put(Database.KEY_ITEM, entry.getItem());
+		cv.put(Database.KEY_ID, entry.getId());
+		cv.put(Database.KEY_TITLE, entry.getTitle());
+		cv.put(Database.KEY_DESCRIPTION, entry.getDescription());
 		database.insert(Database.TABLE_ENTRIES, null, cv);
 		close(); // close the database connection
 	}
@@ -74,6 +72,104 @@ public class DatabaseAdapter {
 				null);
 		close(); // close database connection
 	}
+	
+	/**
+	 * Update a Reminder Entry in the Database
+	 * @param entry the entry, which has to be updated
+	 */
+	public void updateEntry(ReminderEntry entry) {
+		// open the database connection
+		try {
+			open();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		ContentValues cv = new ContentValues();
+		cv.put(Database.KEY_ID, entry.getId());
+		cv.put(Database.KEY_TITLE, entry.getTitle());
+		cv.put(Database.KEY_DESCRIPTION, entry.getDescription());
+		database.update(Database.TABLE_ENTRIES, cv, Database.KEY_ID + " = "
+				+ entry.getId(), null);
+		close(); // close the database connection
+	}
+	
+	/**
+	 * Gets the id of a certain entry
+	 * @param entry the entry from which the id has to be looked up
+	 * @return the id
+	 */
+	public long getId(String entryTitle) {
+		String query = "SELECT " + Database.KEY_ID + " FROM "
+				+ Database.TABLE_ENTRIES + " WHERE " + Database.KEY_TITLE
+				+ " = '" + entryTitle + "'";
+		try {
+			open();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		Cursor cursor = database.rawQuery(query, null);
+		cursor.moveToFirst();
+		long entryId = Long.parseLong(cursor.getString(0));
+		cursor.close();
+		close();
+		return entryId;
+	}
+	
+	/**
+	 * Gets the Title of a certain entry
+	 * @param entry the entry from which the id has to be looked up
+	 * @return the id
+	 */
+	public String getTitle(long id) {
+		String query = "SELECT " + Database.KEY_TITLE + " FROM "
+				+ Database.TABLE_ENTRIES + " WHERE " + Database.KEY_ID
+				+ " = " + id ;
+		try {
+			open();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		Cursor cursor = database.rawQuery(query, null);
+		cursor.moveToFirst();
+		String entryTitle = cursor.getString(0);
+		cursor.close();
+		close();
+		return entryTitle;
+	}
+	
+	/**
+	 * Gets the description of a certain entry
+	 * @param entry the entry from which the id has to be looked up
+	 * @return the id
+	 */
+	public String getDescription(long id) {
+		String query = "SELECT " + Database.KEY_DESCRIPTION + " FROM "
+				+ Database.TABLE_ENTRIES + " WHERE " + Database.KEY_ID
+				+ " = " + id;
+		try {
+			open();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		Cursor cursor = database.rawQuery(query, null);
+		cursor.moveToFirst();
+		String entryDescription = cursor.getString(0);
+		cursor.close();
+		close();
+		return entryDescription;
+	}
+	
+	/** Gets a reminder entry from the database
+	 * @param id
+	 * @return
+	 */
+	public ReminderEntry getEntry (long id) {
+		ReminderEntry entry = new ReminderEntry();
+		entry.setId(id);
+		entry.setTitle(getTitle(id));
+		entry.setDescription(getDescription(id));
+		return entry;
+	}
 
 	/**
 	 * Creates a list of all database entries
@@ -83,10 +179,10 @@ public class DatabaseAdapter {
 		List<ReminderEntry> allEntries = new ArrayList<ReminderEntry>();
 		// create a cursor, which can move through all entries and put them into
 		// the result list
-		Cursor cursor = database.query(Database.TABLE_ENTRIES, this.allEntries,
-				null, null, null, null, null);
-
+		String query = "SELECT * FROM " + Database.TABLE_ENTRIES;
+		Cursor cursor = database.rawQuery(query, null);
 		cursor.moveToFirst();
+		
 		while (!cursor.isAfterLast()) {
 			// creates a ReminderEntry from the current cursor position row
 			ReminderEntry currentEntry = cursorToEntry(cursor);
@@ -107,30 +203,9 @@ public class DatabaseAdapter {
 	private ReminderEntry cursorToEntry(Cursor cursor) {
 		ReminderEntry entry = new ReminderEntry();
 		entry.setId(cursor.getLong(0));
-		entry.setItem(cursor.getString(1));
+		entry.setTitle(cursor.getString(1));
+		entry.setDescription(cursor.getString(2));
 		return entry;
-	}
-
-	/**
-	 * Gets the id of a certain entry
-	 * @param entry the entry from which the id has to be looked up
-	 * @return the id
-	 */
-	public long getId(String entry) {
-		String query = "SELECT " + Database.KEY_ID + " FROM "
-				+ Database.TABLE_ENTRIES + " WHERE " + Database.KEY_ITEM
-				+ " = '" + entry + "'";
-		try {
-			open();
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-		Cursor cursor = database.rawQuery(query, null);
-		cursor.moveToFirst();
-		long entryId = Long.parseLong(cursor.getString(0));
-		cursor.close();
-		close();
-		return entryId;
 	}
 
 	public int getCount() {
@@ -138,26 +213,5 @@ public class DatabaseAdapter {
 		Cursor cursor = database.rawQuery(countQuery, null);
 		cursor.close();
 		return cursor.getCount() + 1;
-	}
-
-	/**
-	 * Update a Reminder Entry in the Database
-	 * 
-	 * @param entry
-	 *            the entry, which has to be updated
-	 */
-	public void updateEntry(ReminderEntry entry) {
-		// open the database connection
-		try {
-			open();
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-		ContentValues cv = new ContentValues();
-		cv.put(Database.KEY_ITEM, entry.getItem());
-		long id = entry.getId();
-		database.update(Database.TABLE_ENTRIES, cv, Database.KEY_ID + " = "
-				+ id, null);
-		close(); // close the database connection
 	}
 }

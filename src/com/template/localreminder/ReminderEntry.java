@@ -1,18 +1,11 @@
 package com.template.localreminder;
 
 public class ReminderEntry {
-	private String item;
 	private long id;
+	private String title;
+	private String description;
 	
 	public ReminderEntry() {
-	}
-
-	public String getItem() {
-		return item;
-	}
-
-	public void setItem(String item) {
-		this.item = item;
 	}
 	
 	public void setId(long id) {
@@ -23,7 +16,23 @@ public class ReminderEntry {
 		return this.id;
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	public String toString(){
-		return item;
+		return description;
 	}
 }

@@ -1,6 +1,7 @@
 package com.template.localreminder;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -20,7 +21,7 @@ public class MainActivity extends ListActivity {
 	// I didn't know a better implementation at this moment.
 	// One has to hold the data in the database AND in an ArrayAdapter
 	// (God knows why) if one wants a dynamic view
-	public static ArrayAdapter<ReminderEntry> adapter;
+	public static ArrayAdapter<String> adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +41,18 @@ public class MainActivity extends ListActivity {
         // make a list with all entries. This one is displayed at the
         // beginning
         List<ReminderEntry> entries = dba.getAllEntries();
+        List<String> entryTitles = new ArrayList<String>();
+        
+        for (ReminderEntry e : entries) {
+        	entryTitles.add(dba.getTitle(e.getId()));
+        }
         
         // the ArrayAdapter received this list and will display it
         adapter = 
-        		new ArrayAdapter<ReminderEntry>(
+        		new ArrayAdapter<String>(
         				this, 
         				android.R.layout.simple_expandable_list_item_1, 
-        				entries
+        				entryTitles
         				);
         
         setListAdapter(adapter);
@@ -74,9 +80,9 @@ public class MainActivity extends ListActivity {
     public void onListItemClick(ListView l, View view, int position, long id) {
     	// Do something when a list item is clicked
     	Intent intent = new Intent(this, DisplayItemActivity.class);
-    	ReminderEntry entryToDisplay = adapter.getItem(position);
-    	String message = entryToDisplay.getItem(); // get reminder entry;
-    	intent.putExtra(EXTRA_MESSAGE, message); // next activity has to query the data
+    	String entryTitle = adapter.getItem(position);
+    	//String title = entryToDisplay.getTitle(); // get reminder entry;
+    	intent.putExtra(EXTRA_MESSAGE, entryTitle); // next activity has to query the data
     	startActivity(intent);
     }
     

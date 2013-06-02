@@ -12,21 +12,28 @@ public class DisplayItemActivity extends Activity {
 	// the message which has to be passed to the change_dataset view
 	// in case one wants to edit the entry
 	public static final String MESSAGE = "";
-	private String entryText;
+	private String entryTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_display_item);
 
-		// Get message from intent
+		// Get title from intent
 		Intent intent = getIntent();
-		entryText = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		entryTitle = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		
+		DatabaseAdapter dba = new DatabaseAdapter(this);
+		long entryId = dba.getId(entryTitle);
+		ReminderEntry entryToDisplay = dba.getEntry(entryId);
 
 		// Create the text view
 		//TextView textView = new TextView(this);
-		TextView textView = (TextView) findViewById(R.id.EntryView);
-		textView.setText(entryText);
+		TextView titleView = (TextView) findViewById(R.id.title_view);
+		titleView.setText(entryToDisplay.getTitle());
+		
+		TextView descriptionView = (TextView) findViewById(R.id.description_view);
+		descriptionView.setText(entryToDisplay.getDescription());
 
 	}
 
@@ -49,7 +56,7 @@ public class DisplayItemActivity extends Activity {
 	 */
 	public void edit_entry(View view) {
 		Intent intent = new Intent(this, ChangeDataSetActivity.class);
-		TextView textView = (TextView) findViewById(R.id.EntryView);
+		TextView textView = (TextView) findViewById(R.id.title_view);
 		String text = textView.getText().toString();
 		intent.putExtra(MESSAGE, text);
     	startActivity(intent);
@@ -60,9 +67,8 @@ public class DisplayItemActivity extends Activity {
 	 */
 	public void delete_entry(View view) {
 		DatabaseAdapter dba = new DatabaseAdapter(this);
-		ReminderEntry entryToDelete = new ReminderEntry();
-		entryToDelete.setItem(entryText);
-		entryToDelete.setId(dba.getId(entryText));
+		long entryId = dba.getId(entryTitle);
+		ReminderEntry entryToDelete = dba.getEntry(entryId);
 		dba.deleteEntry(entryToDelete);
 		// return to start
 		Intent intent = new Intent(this, MainActivity.class);

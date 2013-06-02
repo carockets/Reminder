@@ -17,7 +17,8 @@ import android.widget.EditText;
 public class ChangeDataSetActivity extends Activity {
 	
 	// we get the adapter from the MainActivity
-	ArrayAdapter<ReminderEntry> adapter = MainActivity.adapter;
+	private ArrayAdapter<String> adapter = MainActivity.adapter;
+	private DatabaseAdapter dba;
 	private boolean isEdited = false;
 	private ReminderEntry existingEntry = new ReminderEntry();
 	
@@ -25,15 +26,20 @@ public class ChangeDataSetActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_dataset);
-		EditText text = (EditText) findViewById(R.id.edit_note);
+		EditText titleField = (EditText) findViewById(R.id.edit_title);
+		EditText descriptionField = (EditText) findViewById(R.id.edit_description);
 		
 		//check if a new note is created or a note is edited
 		Intent intent = getIntent();
+		// intent message delivers the entry title
 		String intentMessage = intent.getStringExtra(DisplayItemActivity.MESSAGE);
 		if (intentMessage != null) {
-			String existingText = intent.getStringExtra(DisplayItemActivity.MESSAGE);
-			existingEntry.setItem(existingText);
-			text.setText(existingText);
+			dba = new DatabaseAdapter(this);
+			long entryId = dba.getId(intentMessage);
+			existingEntry = dba.getEntry(entryId);
+
+			titleField.setText(existingEntry.getTitle());
+			descriptionField.setText(existingEntry.getDescription());
 			isEdited = true;
 		}
 	}
@@ -50,10 +56,12 @@ public class ChangeDataSetActivity extends Activity {
 	 * @param view
 	 */
 	public void saveEntry(View view){
-		EditText text = (EditText) findViewById(R.id.edit_note);
-		String entryText = text.getText().toString();
+		EditText titleField = (EditText) findViewById(R.id.edit_title);
+		EditText descriptionField = (EditText) findViewById(R.id.edit_description);
+		String title = titleField.getText().toString();
+		String description = descriptionField.getText().toString();
 		
-		if (entryText.isEmpty()) {
+		if (title.isEmpty()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("Cannot save an empty note")
 			       .setCancelable(false)
@@ -68,31 +76,30 @@ public class ChangeDataSetActivity extends Activity {
 		}
 			
 		// create a database adapter
-		DatabaseAdapter dba = new DatabaseAdapter(this);
+		dba = new DatabaseAdapter(this);
 		// retrieve the text from the text field
-		ReminderEntry entry = new ReminderEntry();
 		
 		if (isEdited) {
-			long entryId = dba.getId(existingEntry.getItem());
-			entry.setId(entryId);
-			entry.setItem(entryText);
-			dba.updateEntry(entry);
+			existingEntry.setTitle(title);
+			existingEntry.setDescription(description);
+			dba.updateEntry(existingEntry);
 			adapter.notifyDataSetChanged();
 			Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 		}
 		else {
+			ReminderEntry newEntry = new ReminderEntry();
 		// create an entry id (just for know done with Math.Random )
-		int entryId = (int) Math.random() * 10000;
+		int entryId = (int) (Math.random() * 10000);
 		// create the ReminderEntry object
-		
-		entry.setItem(entryText);
-		entry.setId(entryId);
+		newEntry.setTitle(title);
+		newEntry.setDescription(description);
+		newEntry.setId(entryId);
 		// add the entry to the database
-		dba.addEntry(entry);
+		dba.addEntry(newEntry);
 		// AND add the entry to the adapter for a dynamic view
-		adapter.add(entry);
+		adapter.add(newEntry.getTitle());
 		// notify about the adapter changes, load the list dynamic
 		adapter.notifyDataSetChanged();
 		// go back to previous view

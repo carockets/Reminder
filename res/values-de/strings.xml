@@ -14,5 +14,10 @@
     <string name="edit">Bearbeiten</string>
     
     <!-- Text Field hints -->
-    <string name="add_Text">Text eigeben</string>
+    <string name="add_title">Title</string>
+    <string name="add_description">Beschreibung</string>
+    
+    <!-- Text Field Headings -->
+    <string name="title_heading">Titel</string>
+    <string name="description_heading">Beschreibung</string>
 </resources>
