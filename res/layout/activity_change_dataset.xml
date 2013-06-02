@@ -10,7 +10,8 @@
         android:ems="10"
         android:text="@string/title_heading"
         android:textSize="24sp"
-        android:textColor="#63b8ff" />
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/darkblue" />
 
     <EditText
         android:id="@+id/edit_title"
@@ -31,9 +32,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginLeft="5dp"
         android:text="@string/description_heading"
         android:textSize="24sp" 
-        android:textColor="#63b8ff"/>
+        android:textColor="@color/darkblue"/>
     
     <EditText
         android:id="@+id/edit_description"
@@ -60,6 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="saveEntry"
+            android:textColor="#fff"
+            android:layout_margin="5dp"
+            android:background="@drawable/custom_button"
             android:text="@string/save" />
 
         <Button
@@ -68,6 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="back"
+            android:textColor="#fff"
+            android:layout_margin="5dp"
+            android:background="@drawable/custom_button"
             android:text="@string/back" />
     </LinearLayout>
 

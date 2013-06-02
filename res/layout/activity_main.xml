@@ -17,7 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/add_Entry" 
-            android:onClick="add_Item"/>
+            android:onClick="add_Item"
+            android:textColor="#fff"
+            android:layout_margin="5dp"
+            android:background="@drawable/custom_button"/>
         
     </LinearLayout>
 

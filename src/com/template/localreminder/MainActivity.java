@@ -31,6 +31,7 @@ public class MainActivity extends ListActivity {
         // the ListView in the activity_main.xml HAS TO have the id="list"!
         setContentView(R.layout.activity_main);
         
+        
         DatabaseAdapter dba = new DatabaseAdapter(this);
         try {
 			dba.open();  // open Database connection
