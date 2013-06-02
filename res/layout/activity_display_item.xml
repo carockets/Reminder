@@ -65,6 +65,7 @@
             android:text="@string/edit"
             android:textColor="#fff"
             android:layout_margin="3dp"
+            android:textSize="20sp"
             android:background="@drawable/custom_button" />
 
         <Button
@@ -76,6 +77,7 @@
             android:text="@string/delete"
             android:textColor="#fff"
             android:layout_margin="3dp"
+            android:textSize="20sp"
             android:background="@drawable/custom_button" />
         
         <Button
@@ -87,6 +89,7 @@
             android:text="@string/back"
             android:textColor="#fff"
             android:layout_margin="3dp"
+            android:textSize="20sp"
             android:background="@drawable/custom_button" />
     </LinearLayout>
 

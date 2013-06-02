@@ -11,6 +11,7 @@
         android:text="@string/title_heading"
         android:textSize="24sp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/darkblue" />
 
     <EditText
@@ -64,6 +65,7 @@
             android:onClick="saveEntry"
             android:textColor="#fff"
             android:layout_margin="5dp"
+            android:textSize="20sp"
             android:background="@drawable/custom_button"
             android:text="@string/save" />
 
@@ -75,6 +77,7 @@
             android:onClick="back"
             android:textColor="#fff"
             android:layout_margin="5dp"
+            android:textSize="20sp"
             android:background="@drawable/custom_button"
             android:text="@string/back" />
     </LinearLayout>

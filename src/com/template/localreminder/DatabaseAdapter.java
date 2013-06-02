@@ -107,18 +107,24 @@ public class DatabaseAdapter {
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		Cursor cursor = database.rawQuery(query, null);
-		cursor.moveToFirst();
-		long entryId = Long.parseLong(cursor.getString(0));
-		cursor.close();
-		close();
-		return entryId;
+		
+		try {
+			Cursor cursor = database.rawQuery(query, null);
+			cursor.moveToFirst();
+			long entryId = Long.parseLong(cursor.getString(0));
+			cursor.close();
+			close();
+			return entryId;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 	
 	/**
 	 * Gets the Title of a certain entry
 	 * @param entry the entry from which the id has to be looked up
-	 * @return the id
+	 * @return the title or null
 	 */
 	public String getTitle(long id) {
 		String query = "SELECT " + Database.KEY_TITLE + " FROM "
@@ -129,18 +135,24 @@ public class DatabaseAdapter {
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		Cursor cursor = database.rawQuery(query, null);
-		cursor.moveToFirst();
-		String entryTitle = cursor.getString(0);
-		cursor.close();
-		close();
-		return entryTitle;
+		
+		try {
+			Cursor cursor = database.rawQuery(query, null);
+			cursor.moveToFirst();
+			String entryTitle = cursor.getString(0);
+			cursor.close();
+			close();
+			return entryTitle;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}	
 	}
 	
 	/**
 	 * Gets the description of a certain entry
 	 * @param entry the entry from which the id has to be looked up
-	 * @return the id
+	 * @return the description or null
 	 */
 	public String getDescription(long id) {
 		String query = "SELECT " + Database.KEY_DESCRIPTION + " FROM "
@@ -151,24 +163,35 @@ public class DatabaseAdapter {
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		Cursor cursor = database.rawQuery(query, null);
-		cursor.moveToFirst();
-		String entryDescription = cursor.getString(0);
-		cursor.close();
-		close();
-		return entryDescription;
+		
+		try {
+			Cursor cursor = database.rawQuery(query, null);
+			cursor.moveToFirst();
+			String entryDescription = cursor.getString(0);
+			cursor.close();
+			close();
+			return entryDescription;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	/** Gets a reminder entry from the database
-	 * @param id
-	 * @return
+	 * @param id of the entry
+	 * @return the entry or null
 	 */
 	public ReminderEntry getEntry (long id) {
 		ReminderEntry entry = new ReminderEntry();
 		entry.setId(id);
-		entry.setTitle(getTitle(id));
-		entry.setDescription(getDescription(id));
-		return entry;
+		try {
+			entry.setTitle(getTitle(id));
+			entry.setDescription(getDescription(id));
+			return entry;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	/**
