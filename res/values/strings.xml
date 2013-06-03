@@ -12,13 +12,22 @@
     <string name="back">Back</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="set_time">Set Time</string>
+    <string name="set_date">Set Date</string>
+    <string name="ok_delete">Yes, delete!</string>
+    <string name="cancel_delete">No</string>
     
     <!-- Text Field hints -->
-    <string name="add_title">Title</string>
-    <string name="add_description">Description</string>
+    <string name="add_title">Add title</string>
+    <string name="add_description">Add description</string>
     
     <!-- Text Field Headings -->
     <string name="title_heading">Title</string>
     <string name="description_heading">Description</string>
+    
+    <!-- Text Alerts -->
+    <string name="confirm_delete">Do you really want to delete this entry?</string>
+    <string name="entry_exists">An entry with this title already exists</string>
+    <string name="empty_title">Cannot save entry with empty title</string>
     
 </resources>

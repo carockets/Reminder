@@ -1,8 +1,10 @@
 package com.template.localreminder;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -62,18 +64,52 @@ public class DisplayItemActivity extends Activity {
     	startActivity(intent);
 	}
 	
-	/** Deletes an entry from database
+	/** Creates a confirm dialog an returns to main activity after delete
 	 * @param view
 	 */
 	public void delete_entry(View view) {
+		createAlert(getString(R.string.confirm_delete));	
+	}
+	
+	/** Deletes an entry in the database
+	 * 
+	 */
+	public void delete() {
 		DatabaseAdapter dba = new DatabaseAdapter(this);
 		long entryId = dba.getId(entryTitle);
 		ReminderEntry entryToDelete = dba.getEntry(entryId);
 		dba.deleteEntry(entryToDelete);
-		// return to start
-		Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+		backToStart();
 	}
-
+	
+	/** Loads the launcher view again
+	 * 
+	 */
+	public void backToStart() {
+		Intent intent = new Intent(this, MainActivity.class);
+	    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+	}
+	
+	
+	/** Creates an alert dialog
+	 * @param message
+	 */
+	public void createAlert(String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(message).setCancelable(false)
+				.setPositiveButton(getString(R.string.ok_delete), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						delete();
+					}
+				}).setNegativeButton(getString(R.string.cancel_delete), new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
 }

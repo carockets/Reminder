@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
     
     <TextView
@@ -21,7 +21,7 @@
         android:ems="10"
         android:gravity="top|left"
         android:hint="@string/add_title"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:textSize="24sp" 
         android:layout_marginBottom="10dp">
 
@@ -41,15 +41,27 @@
     <EditText
         android:id="@+id/edit_description"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.61"
+        android:layout_height="wrap_content"
+       
         android:ems="10"
         android:textSize="24sp"
         android:gravity="top|left"
         android:hint="@string/add_description"
-        android:inputType="text" >
+        android:inputType="textMultiLine" >
 
     </EditText>
+    
+     <DatePicker 
+         android:id="@+id/set_date"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"/>
+     
+     <!-- 
+     <TimePicker 
+         android:id="@+id/set_time"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"/>
+      -->
 
     <LinearLayout
         android:layout_width="match_parent"

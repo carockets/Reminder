@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 /**
@@ -29,7 +30,11 @@ public class ChangeDataSetActivity extends Activity {
 		setContentView(R.layout.activity_change_dataset);
 		EditText titleField = (EditText) findViewById(R.id.edit_title);
 		EditText descriptionField = (EditText) findViewById(R.id.edit_description);
-
+		DatePicker datePicker =  (DatePicker) findViewById(R.id.set_date);
+		datePicker.setCalendarViewShown(false);
+		ScheduleClient scheduleClient;
+//		TimePicker timePicker = (TimePicker) findViewById(R.id.set_time);
+	    
 		// check if a new note is created or a note is edited
 		Intent intent = getIntent();
 		// intent message delivers the entry title
@@ -52,6 +57,7 @@ public class ChangeDataSetActivity extends Activity {
 		getMenuInflater().inflate(R.menu.change_dataset, menu);
 		return true;
 	}
+	
 
 	/**
 	 * Action to save an entry to the database, when the "Save" Button is
@@ -67,7 +73,7 @@ public class ChangeDataSetActivity extends Activity {
 		String description = descriptionField.getText().toString();
 
 		if (title.isEmpty()) {
-			createAlert("cannot save empty note");
+			createAlert("Cannot save note with empty title");
 			return;
 		}
 

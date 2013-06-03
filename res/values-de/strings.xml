@@ -11,13 +11,20 @@
     <string name="save">Speichern</string>
     <string name="back">Zurück</string>
     <string name="delete">Löschen</string>
-    <string name="edit">Bearbeiten</string>
+    <string name="edit">Ändern</string>
+    <string name="ok_delete">Ja!</string>
+    <string name="cancel_delete">Nein</string>
     
     <!-- Text Field hints -->
-    <string name="add_title">Title</string>
-    <string name="add_description">Beschreibung</string>
+    <string name="add_title">Titel eingeben</string>
+    <string name="add_description">Beschreibung hinzufügen</string>
     
     <!-- Text Field Headings -->
     <string name="title_heading">Titel</string>
     <string name="description_heading">Beschreibung</string>
+    
+    <!-- Text Alerts -->
+    <string name="confirm_delete">Wirklich löschen?</string>
+    <string name="entry_exists">Ein Eintrag mit diesem Titel existiert bereits</string>
+    <string name="empty_title">Ein Eintrag muss einen Titel beinhalten!</string>
 </resources>
