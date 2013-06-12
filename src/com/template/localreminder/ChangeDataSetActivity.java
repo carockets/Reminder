@@ -1,15 +1,22 @@
 package com.template.localreminder;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.template.localreminder.database.DatabaseAdapter;
 
 /**
  * This class manages all the entry changes in the database including creating
@@ -22,7 +29,9 @@ public class ChangeDataSetActivity extends Activity {
 	private ArrayAdapter<String> adapter = MainActivity.adapter;
 	private DatabaseAdapter dba;
 	private boolean isEdited = false;
-	private ReminderEntry existingEntry = new ReminderEntry();
+	private ReminderEntry existingEntry;
+	public static String isNotificationSet = "No notification set yet";
+	public static TextView displayIsNotificationSet;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +39,8 @@ public class ChangeDataSetActivity extends Activity {
 		setContentView(R.layout.activity_change_dataset);
 		EditText titleField = (EditText) findViewById(R.id.edit_title);
 		EditText descriptionField = (EditText) findViewById(R.id.edit_description);
-		DatePicker datePicker =  (DatePicker) findViewById(R.id.set_date);
-		datePicker.setCalendarViewShown(false);
-		ScheduleClient scheduleClient;
-//		TimePicker timePicker = (TimePicker) findViewById(R.id.set_time);
+		displayIsNotificationSet = (TextView) findViewById(R.id.set_time_heading);
+		displayIsNotificationSet.setText(isNotificationSet);
 	    
 		// check if a new note is created or a note is edited
 		Intent intent = getIntent();
@@ -115,6 +122,16 @@ public class ChangeDataSetActivity extends Activity {
 			}
 		}
 	}
+	
+	// Action triggered by the button
+	public void get_Location(View view) {
+		Intent intent = new Intent(this, GetCurrentLocationActivity.class);
+		startActivity(intent);
+	}
+	
+	public void getGEOCoordinates(Context ctx) {
+	
+	}
 
 	/**
 	 * Go back to previous view
@@ -139,5 +156,9 @@ public class ChangeDataSetActivity extends Activity {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-
+    
+    public void open_set_time (View view){
+    	Intent intent = new Intent(this, SetTimeActivity.class);
+    	startActivity(intent);
+    }
 }

@@ -7,6 +7,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
+</uses-permission>
 
     <application
         android:allowBackup="true"
@@ -30,6 +33,26 @@
             android:name="com.template.localreminder.DisplayItemActivity"
             android:label="@string/title_activity_diaplay_item" >
         </activity>
-    </application>
+        <activity
+            android:name="com.template.localreminder.notification.NotifyActivity"
+            android:label="@string/title_activity_notify" >
+        </activity>
+        <activity
+            android:name="com.template.localreminder.SetTimeActivity"
+            android:label="@string/title_activity_set_time" >
+        </activity>
+        <activity 
+            android:name="com.template.localreminder.GetCurrentLocationActivity"
+            android:label="@string/title_activity_get_current_location">
+        </activity>
 
+        <service android:name="com.template.localreminder.notification.ScheduleService" />
+        <service android:name="com.template.localreminder.notification.NotifyService" />
+
+        <activity
+            android:name="com.template.localreminder.SecondActivity"
+            android:label="@string/title_activity_second" >
+        </activity>
+    
+    </application>
 </manifest>

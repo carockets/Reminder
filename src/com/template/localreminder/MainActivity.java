@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.template.localreminder.database.DatabaseAdapter;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;

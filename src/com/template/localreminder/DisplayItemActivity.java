@@ -1,5 +1,7 @@
 package com.template.localreminder;
 
+import com.template.localreminder.database.DatabaseAdapter;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

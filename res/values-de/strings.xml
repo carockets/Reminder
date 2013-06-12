@@ -5,6 +5,7 @@
     <string name="action_settings">Einstellungen</string>
     <string name="title_activity_change_dataset">Eintrag ändern oder bearbeiten</string>
     <string name="title_activity_diaplay_item">Eintrag anzeigen</string>
+    <string name="title_activity_get_current_location">Momentane Position</string>
     
     <!-- Buttons -->
     <string name="add_Entry">+ Eintrag hinzufügen</string>
@@ -14,6 +15,12 @@
     <string name="edit">Ändern</string>
     <string name="ok_delete">Ja!</string>
     <string name="cancel_delete">Nein</string>
+    <string name="set_alarm">Speichern</string>
+    <string name="set_time">Uhrzeit</string>
+    <string name="set_date">Datum</string>
+    <string name="set_alert_time">Alarm festlegen</string>
+    <string name="notification">Es ist Zeit etwas zu tun!</string>
+    <string name="current_location">Geo Location</string>
     
     <!-- Text Field hints -->
     <string name="add_title">Titel eingeben</string>
@@ -22,6 +29,9 @@
     <!-- Text Field Headings -->
     <string name="title_heading">Titel</string>
     <string name="description_heading">Beschreibung</string>
+    <string name="set_time_heading">Wann?</string>
+    <string name="get_current_location">Ich bin hier</string>
+    <string name="locate_me">Finde mich</string>
     
     <!-- Text Alerts -->
     <string name="confirm_delete">Wirklich löschen?</string>
