@@ -1,14 +1,10 @@
 package com.template.localreminder;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -30,8 +26,10 @@ public class ChangeDataSetActivity extends Activity {
 	private DatabaseAdapter dba;
 	private boolean isEdited = false;
 	private ReminderEntry existingEntry;
-	public static String isNotificationSet = "No notification set yet";
+	// stores the notification time for an entry in string format
+	public static String NotificationSet = "";
 	public static TextView displayIsNotificationSet;
+	public static int PendingIntentAlarmId = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class ChangeDataSetActivity extends Activity {
 		EditText titleField = (EditText) findViewById(R.id.edit_title);
 		EditText descriptionField = (EditText) findViewById(R.id.edit_description);
 		displayIsNotificationSet = (TextView) findViewById(R.id.set_time_heading);
-		displayIsNotificationSet.setText(isNotificationSet);
+		displayIsNotificationSet.setText(NotificationSet);
 	    
 		// check if a new note is created or a note is edited
 		Intent intent = getIntent();
@@ -54,6 +52,7 @@ public class ChangeDataSetActivity extends Activity {
 
 			titleField.setText(existingEntry.getTitle());
 			descriptionField.setText(existingEntry.getDescription());
+			displayIsNotificationSet.setText(existingEntry.getAlertText());
 			isEdited = true;
 		}
 	}
@@ -108,6 +107,11 @@ public class ChangeDataSetActivity extends Activity {
 				return;
 			} else {
 				newEntry.setDescription(description);
+				if (PendingIntentAlarmId != 0) {
+					newEntry.setAlertId(PendingIntentAlarmId);
+					newEntry.setAlertText(NotificationSet);
+					NotificationSet = "";
+				}
 				// create an entry id (just for now done with Math.Random )
 				int entryId = (int) (Math.random() * 10000);
 				newEntry.setId(entryId);
@@ -159,6 +163,9 @@ public class ChangeDataSetActivity extends Activity {
     
     public void open_set_time (View view){
     	Intent intent = new Intent(this, SetTimeActivity.class);
+    	if(isEdited) {
+    		PendingIntentAlarmId = existingEntry.getAlertId();
+    	}
     	startActivity(intent);
     }
 }

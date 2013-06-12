@@ -45,8 +45,32 @@
     <TextView
         android:id="@+id/description_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.61"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"/>
+    
+    <View android:id="@+id/separator2" 
+	 android:background="@color/darkblue" 
+	 android:layout_width = "fill_parent"
+	 android:layout_height="1dip"
+	 android:layout_marginBottom="15dp"/>
+    
+    
+    <TextView
+        android:id="@+id/entry_notification_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="@string/notification_heading"
+        android:textSize="24sp" 
+        android:textColor="@color/darkblue"/>
+    
+    <TextView
+        android:id="@+id/notification_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:textSize="24sp"
         android:ems="10"/>
     

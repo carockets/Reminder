@@ -21,6 +21,7 @@
     <string name="set_alert_time">Alarm festlegen</string>
     <string name="notification">Es ist Zeit etwas zu tun!</string>
     <string name="current_location">Geo Location</string>
+    <string name="cancel">Abbrechen</string>
     
     <!-- Text Field hints -->
     <string name="add_title">Titel eingeben</string>
@@ -32,6 +33,9 @@
     <string name="set_time_heading">Wann?</string>
     <string name="get_current_location">Ich bin hier</string>
     <string name="locate_me">Finde mich</string>
+    <string name="determining_current_location">Suche deine aktuelle Position. \n Die kann
+        einen Moment dauern..... </string>
+        <string name="notification_heading">Erinnerung</string>
     
     <!-- Text Alerts -->
     <string name="confirm_delete">Wirklich löschen?</string>

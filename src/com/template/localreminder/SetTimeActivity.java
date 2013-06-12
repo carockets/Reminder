@@ -33,6 +33,9 @@ public class SetTimeActivity extends Activity {
         // Get a reference to our date picker
         timePicker = (TimePicker) findViewById(R.id.set_time);
         timePicker.setIs24HourView(true);
+        Calendar rightNow = Calendar.getInstance();
+        int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+        timePicker.setCurrentHour(hour);
         datePicker = (DatePicker) findViewById(R.id.set_date);
         datePicker.setCalendarViewShown(false);
     }
@@ -49,15 +52,22 @@ public class SetTimeActivity extends Activity {
     	// Create a new calendar set to the date chosen
     	// we set the time to midnight (i.e. the first minute of that day)
     	c.set(year, month, day);
-    	c.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
-    	c.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+    	// make the user input available
+    	timePicker.clearFocus();
+    	int minute = timePicker.getCurrentMinute();
+    	int hour = timePicker.getCurrentHour();
+    	c.set(Calendar.HOUR_OF_DAY, hour);
+    	c.set(Calendar.MINUTE, minute);
     	c.set(Calendar.SECOND, 0);
     	// Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
     	scheduleClient.setAlarmForNotification(c);
-    	ChangeDataSetActivity.displayIsNotificationSet.setText("Notification set for: \n"+ day +"/"+ (month+1) +"/"+ year);
+    	String NotificationText = "Notification set for: "+ day +"/"+ (month+1) +"/"+ year
+    			+ " at " + hour + ":" + minute;
+    	ChangeDataSetActivity.NotificationSet = NotificationText;
+    	ChangeDataSetActivity.displayIsNotificationSet.setText(NotificationText);
     	finish();
     	// Notify the user what they just did
-    	Toast.makeText(this, "Notification set for: "+ day +"/"+ (month+1) +"/"+ year, Toast.LENGTH_SHORT).show();
+    	Toast.makeText(this, NotificationText, Toast.LENGTH_SHORT).show();
     }
     
     @Override

@@ -38,6 +38,9 @@ public class DisplayItemActivity extends Activity {
 		
 		TextView descriptionView = (TextView) findViewById(R.id.description_view);
 		descriptionView.setText(entryToDisplay.getDescription());
+		
+		TextView notificationView = (TextView) findViewById(R.id.notification_view);
+		notificationView.setText(entryToDisplay.getAlertText());
 
 	}
 

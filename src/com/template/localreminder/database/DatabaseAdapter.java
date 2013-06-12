@@ -53,6 +53,8 @@ public class DatabaseAdapter {
 		cv.put(Database.KEY_ID, entry.getId());
 		cv.put(Database.KEY_TITLE, entry.getTitle());
 		cv.put(Database.KEY_DESCRIPTION, entry.getDescription());
+		cv.put(Database.KEY_PENDING_INTENT_ALARM_ID, entry.getAlertId());
+		cv.put(Database.KEY_NOTIFICATION_TIME, entry.getAlertText());
 		database.insert(Database.TABLE_ENTRIES, null, cv);
 		close(); // close the database connection
 	}
@@ -178,6 +180,28 @@ public class DatabaseAdapter {
 		}
 	}
 	
+	public String getAlarmText(long id) {
+		String query = "SELECT " + Database.KEY_NOTIFICATION_TIME + " FROM "
+				+ Database.TABLE_ENTRIES + " WHERE " + Database.KEY_ID
+				+ " = " + id;
+		try {
+			open();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		
+		try {
+			Cursor cursor = database.rawQuery(query, null);
+			cursor.moveToFirst();
+			String entryAlarmSetting = cursor.getString(0);
+			cursor.close();
+			close();
+			return entryAlarmSetting;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	/** Gets a reminder entry from the database
 	 * @param id of the entry
 	 * @return the entry or null
@@ -188,6 +212,7 @@ public class DatabaseAdapter {
 		try {
 			entry.setTitle(getTitle(id));
 			entry.setDescription(getDescription(id));
+			entry.setAlertText(getAlarmText(id));
 			return entry;
 		} catch (Exception e) {
 			e.printStackTrace();

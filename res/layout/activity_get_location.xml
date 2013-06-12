@@ -11,15 +11,16 @@
 		android:text="@string/get_current_location"
 		android:layout_weight="0.20"
 		android:gravity="center"
-		android:textSize="20sp" />
-	<EditText
+		android:textSize="24sp"
+		android:textColor="@color/darkblue" />
+	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_weight="0.33"
-		android:id="@+id/editTextLocation"
-		android:editable="false">
-		<requestFocus></requestFocus>
-	</EditText>
+		android:gravity="center"
+		android:textSize="18sp"
+		android:id="@+id/viewTextLocation" >
+	</TextView>
 	<LinearLayout
 		android:id="@+id/layButtonH"
 		android:layout_height="wrap_content"
@@ -27,10 +28,16 @@
 		android:gravity="center"
 		android:layout_weight="0.15">
 		<Button
-			android:layout_width="wrap_content"
+			android:layout_width="100dp"
 			android:layout_height="wrap_content"
 			android:text="@string/locate_me"
 			android:id="@+id/btnLocation"></Button>
+		<Button
+			android:layout_width="100dp"
+			android:layout_height="wrap_content"
+			android:text="@string/cancel"
+			android:id="@+id/btnCancelLocalising"
+			android:onClick="cancel_localising"></Button>
 	</LinearLayout>
 	<LinearLayout
 		android:id="@+id/layloadingH"

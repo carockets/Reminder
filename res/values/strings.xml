@@ -7,7 +7,10 @@
     <string name="title_activity_change_dataset">Add or edit entry</string>
     <string name="title_activity_diaplay_item">Display enty</string>
     <string name="title_activity_get_current_location">Get current location</string>
-
+    <string name="title_activity_set_time">SetTimeActivity</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_notify">NotifyActivity</string>
+    
     <!-- Buttons -->
     <string name="add_Entry">+ Add Entry</string>
     <string name="save">Save</string>
@@ -22,6 +25,7 @@
     <string name="set_alarm">Save</string>
     <string name="notification">It\'s time to do something!</string>
     <string name="current_location">Geo Location</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Text Field hints -->
     <string name="add_title">Add title</string>
@@ -31,16 +35,17 @@
     <string name="title_heading">Title</string>
     <string name="description_heading">Description</string>
     <string name="set_time_heading">Set Time</string>
-    <string name="get_current_location">I\'m here</string>
+    <string name="get_current_location">Where am I ?</string>
     <string name="locate_me">Find me</string>
+    <string name="notification_heading">Notification</string>
 
     <!-- Text Alerts -->
     <string name="confirm_delete">Do you really want to delete this entry?</string>
     <string name="entry_exists">An entry with this title already exists</string>
     <string name="empty_title">Cannot save entry with empty title</string>
-    <string name="title_activity_notify">NotifyActivity</string>
+
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_set_time">SetTimeActivity</string>
-    <string name="title_activity_second">SecondActivity</string>
+    <string name="determining_current_location">Determining your current Location. \n This
+        could take a while....</string>
 
 </resources>

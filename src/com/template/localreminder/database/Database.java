@@ -14,11 +14,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper{
 	private static final String DATABASE_NAME = "stuff";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	public static final String TABLE_ENTRIES = "entries";
 	public static final String KEY_ID = "id";
 	public static final String KEY_DESCRIPTION = "description";
 	public static final String KEY_TITLE = "title";
+	public static final String KEY_PENDING_INTENT_ALARM_ID = "alarmId";
+	public static final String KEY_NOTIFICATION_TIME = "notificationTime"; 
+	
 	
 	public List<ReminderEntry> list = new ArrayList<ReminderEntry>();
 	
@@ -30,7 +33,9 @@ public class Database extends SQLiteOpenHelper{
 		String query = "CREATE TABLE " + TABLE_ENTRIES + "("
 				+ KEY_ID + " INTEGER PRIMARY KEY, "
 				+ KEY_TITLE + " TEXT, "
-				+ KEY_DESCRIPTION + " TEXT "
+				+ KEY_DESCRIPTION + " TEXT, "
+				+ KEY_PENDING_INTENT_ALARM_ID + " INTEGER, "
+				+ KEY_NOTIFICATION_TIME + " TEXT "
 				+ ")";
 		db.execSQL(query);
 	}

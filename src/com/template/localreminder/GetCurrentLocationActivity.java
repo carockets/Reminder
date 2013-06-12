@@ -22,17 +22,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GetCurrentLocationActivity extends Activity implements OnClickListener {
 	
-	private LocationManager locationMangaer=null;
+	private LocationManager locationManager=null;
 	private LocationListener locationListener=null;	
 	
 	private Button btnGetLocation = null;
-	private EditText editLocation = null;	
+	private TextView editLocation = null;	
 	private ProgressBar pb =null;
 	
 	private static final String TAG = "Debug";
@@ -50,14 +50,21 @@ public class GetCurrentLocationActivity extends Activity implements OnClickListe
 		pb = (ProgressBar) findViewById(R.id.progressBar1);
 		pb.setVisibility(View.INVISIBLE);
 		
-		editLocation = (EditText) findViewById(R.id.editTextLocation);	
+		editLocation = (TextView) findViewById(R.id.viewTextLocation);	
 
 		btnGetLocation = (Button) findViewById(R.id.btnLocation);
 		btnGetLocation.setOnClickListener(this);
 		
-		locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 	}
+	
+	// stop retrieving location updates when paused
+	@Override
+	public void onPause(){
+	    locationManager.removeUpdates(locationListener);
+	    super.onPause();
+	} 
 
 	@Override
 	public void onClick(View v) {
@@ -66,18 +73,21 @@ public class GetCurrentLocationActivity extends Activity implements OnClickListe
 			
 			Log.v(TAG, "onClick");		
 			
-			editLocation.setText("Please!! move your device to see the changes in coordinates."+"\nWait..");
+			editLocation.setText(R.string.determining_current_location);
 			
 			pb.setVisibility(View.VISIBLE);
 			locationListener = new MyLocationListener();
 
-			locationMangaer.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10,
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10,
 	                locationListener);
 			
 			} else {
 			alertbox("Gps Status!!", "Your GPS is: OFF");
 		}
-
+	}
+	
+	public void cancel_localising (View view) {
+		finish();
 	}
 
 	/*----------Method to Check GPS is enable or disable ------------- */
